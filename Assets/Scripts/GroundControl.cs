@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GroundControl : MonoBehaviour {
-    float speed = .5f;
+    float speed = 1;
     // Use this for initialization
     void Start () {
         
