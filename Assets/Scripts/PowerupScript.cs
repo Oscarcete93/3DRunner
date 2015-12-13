@@ -7,7 +7,7 @@ public class PowerupScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, 0, objectSpeed);
+        transform.Translate(0, 0, objectSpeed * Time.timeScale);
     }
 }
 

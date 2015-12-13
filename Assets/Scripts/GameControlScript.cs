@@ -3,7 +3,7 @@ using System.Collections;
 
 public class GameControlScript : MonoBehaviour
 {
-
+    public GUISkin skin;
     float timeRemaining = 10;
     float timeExtension = 3f;
     float timeDeduction = 2f;
@@ -42,6 +42,7 @@ public class GameControlScript : MonoBehaviour
 
     void OnGUI()
     {
+        GUI.skin = skin; //use the skin in game over menu
         //check if game is not over, if so, display the score and the time left
         if (!isGameOver)
         {
