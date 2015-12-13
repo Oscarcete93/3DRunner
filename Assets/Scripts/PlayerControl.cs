@@ -1,10 +1,12 @@
 ﻿using UnityEngine;
 using System.Collections;
 
+
 public class PlayerControl : MonoBehaviour
 {
 
     CharacterController controller;
+    public GameControlScript control;
     bool isGrounded = false;
     public float speed = 6.0f;
     public float jumpSpeed = 8.0f;
@@ -44,13 +46,14 @@ public class PlayerControl : MonoBehaviour
     //check if the character collects the powerups or the snags
     void OnTriggerEnter(Collider other)
     {
-        if (other.gameObject.name == "Powerup(Clone)")
+        if (other.gameObject.name == "powerup(Clone)")
         {
-            //do something
+            control.PowerupCollected();
         }
-        else if (other.gameObject.name == "Obstacle(Clone)")
+        else if (other.gameObject.name == "wall(Clone)")
         {
-            //do something
+
+            control.AlcoholCollected();
         }
         Destroy(other.gameObject);            //destroy the snag or powerup if colllected by the player
 
