@@ -35,7 +35,7 @@ public class GameControlScript : MonoBehaviour
         timeRemaining += timeExtension;
     }
 
-    public void AlcoholCollected()
+    public void WallCollision()
     {
         timeRemaining -= timeDeduction;
     }

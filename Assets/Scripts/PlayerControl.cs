@@ -35,7 +35,17 @@ public class PlayerControl : MonoBehaviour
         else if (other.gameObject.name == "wall(Clone)")
         {
 
-            control.AlcoholCollected();
+            control.WallCollision();
+        }
+        else if (other.gameObject.name == "Building(Clone)")
+        {
+
+            control.WallCollision();
+        }
+        else if (other.gameObject.name == "tower(Clone)")
+        {
+
+            control.WallCollision();
         }
         Destroy(other.gameObject);            //destroy the snag or powerup if colllected by the player
 
