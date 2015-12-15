@@ -10,16 +10,27 @@ public class basicControl : MonoBehaviour
     void Update()
     {
         CharacterController controller = GetComponent<CharacterController>();
+       
         if (controller.isGrounded)
         {
             moveDirection = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxis("Vertical"));
             moveDirection = transform.TransformDirection(moveDirection);
             moveDirection *= speed;
-            if (Input.GetButton("Jump"))
-                moveDirection.y = jumpSpeed;
+            if (Input.GetButton("Jump"))moveDirection.y = jumpSpeed;
+            moveDirection.y -= gravity * Time.deltaTime;
+            controller.Move(moveDirection * Time.deltaTime);
 
         }
-        moveDirection.y -= gravity * Time.deltaTime;
-        controller.Move(moveDirection * Time.deltaTime);
+        else
+        {
+            moveDirection.x = Input.GetAxis("Horizontal");
+            moveDirection.z = Input.GetAxis("Vertical");
+            moveDirection = transform.TransformDirection(moveDirection);
+            moveDirection.x *= speed;
+            moveDirection.z *= speed;
+            moveDirection.y -= gravity * Time.deltaTime;
+            controller.Move(moveDirection * Time.deltaTime);
+        }
+       
     }
 }

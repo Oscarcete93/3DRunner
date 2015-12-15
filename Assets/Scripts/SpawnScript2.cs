@@ -17,10 +17,10 @@ public class SpawnScript2 : MonoBehaviour
     float powerCycle = 2;
     bool spawnPowerup = true;
     float powerpos;
-    float randtime1 = 3;
-    float randtime2 = 3;
-    float randtime3 = 3;
-    float randtime4 = 3;
+    float randtime1 = 1;
+    float randtime2 = 1;
+    float randtime3 = 1;
+    float randtime4 = 1;
     void Update()
     {
         GameObject temp;
@@ -48,10 +48,11 @@ public class SpawnScript2 : MonoBehaviour
         {
             
             temp = (GameObject)Instantiate(Building);
-            int distance = Random.Range(4, 15);
+            int distance = Random.Range(4, 20);
             temp.transform.position = new Vector3(powerpos + distance, 0, 80);
+            temp.transform.localScale = new Vector3(Random.Range(2, 6), Random.Range(4, 16), Random.Range(2, 6));
             cityRightElapsed = 0;
-            randtime1 = Random.Range(1, 12)/10;
+            randtime1 = Random.Range(1, 12)/7;
         }
         if (cityLeftElapsed > randtime2)
         {
@@ -59,8 +60,9 @@ public class SpawnScript2 : MonoBehaviour
             temp = (GameObject)Instantiate(Building);
             int distance = Random.Range(4, 15);
             temp.transform.position = new Vector3(powerpos - distance, 0, 80);
+            temp.transform.localScale = new Vector3(Random.Range(2, 6), Random.Range(4, 16), Random.Range(2, 6));
             cityLeftElapsed = 0;
-            randtime2 = Random.Range(1, 12) / 10;
+            randtime2 = Random.Range(1, 12) / 7;
         }
         if (towerRightElapsed > randtime3)
         {
@@ -68,8 +70,9 @@ public class SpawnScript2 : MonoBehaviour
             temp = (GameObject)Instantiate(tower);
             int distance = Random.Range(4, 15);
             temp.transform.position = new Vector3(powerpos + distance, 0, 80);
+            temp.transform.localScale = new Vector3(Random.Range(2, 6), Random.Range(2, 6), Random.Range(2, 6));
             towerRightElapsed = 0;
-            randtime3 = Random.Range(1, 12) / 10;
+            randtime3 = Random.Range(1, 12) / 7;
         }
         if (towerLeftElapsed > randtime4)
         {
@@ -77,8 +80,9 @@ public class SpawnScript2 : MonoBehaviour
             temp = (GameObject)Instantiate(tower);
             int distance = Random.Range(4, 15);
             temp.transform.position = new Vector3(powerpos - distance, 0, 80);
+            temp.transform.localScale = new Vector3(Random.Range(2, 6), Random.Range(2, 6), Random.Range(2, 6));
             towerLeftElapsed = 0;
-            randtime4 = Random.Range(1, 12) / 10;
+            randtime4 = Random.Range(1, 12) / 7;
         }
 
 
