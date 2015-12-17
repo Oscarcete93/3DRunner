@@ -3,12 +3,18 @@ using System.Collections;
 
 public class MovingObstacle : MonoBehaviour
 {
-    public float objectSpeed = -0.5f;
-    public float SlowSpeed = 0.05f;
-
+    public float SlowSpeed = 0.1f;
+    public float time = 0;
+    int d = 1;
     void Update()
     {
-        transform.Translate(0, 0, objectSpeed * Time.timeScale);
-        transform.Translate(0, SlowSpeed * Time.timeScale, objectSpeed * Time.timeScale);
+        time += Time.deltaTime;
+        transform.Translate(0,SlowSpeed * Time.timeScale*d, 0);
+        if (time >1.4)
+        {
+            time = 0;
+            d = -d;
+        }
+
     }
 }

@@ -37,12 +37,12 @@ public class PlayerControl : MonoBehaviour
 
             control.WallCollision();
         }
-        else if (other.gameObject.name == "Building(Clone)")
+        else if (other.gameObject.name == "wall2(Clone)")
         {
 
             control.WallCollision();
         }
-        else if (other.gameObject.name == "tower(Clone)")
+        else if (other.gameObject.name == "MovingWall(Clone)")
         {
 
             control.WallCollision();

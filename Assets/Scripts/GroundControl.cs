@@ -2,7 +2,7 @@
 using System.Collections;
 
 public class GroundControl : MonoBehaviour {
-    float speed = 1;
+    float speed = -4;
     // Use this for initialization
     void Start () {
         
@@ -15,6 +15,7 @@ public class GroundControl : MonoBehaviour {
    
            float offset = Time.time * speed;
            GetComponent<Renderer>().material.mainTextureOffset = new Vector2(0, -offset);
+
         
     }
 }

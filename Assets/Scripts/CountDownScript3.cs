@@ -10,6 +10,9 @@ public class CountDownScript3 : MonoBehaviour
     public GameObject wall2;
     public GameObject wall3;
     public GameObject wall4;
+    public AudioSource countdownSound; //reference to the audio source
+    public bool isCountDown = false; //countdown flag
+
 
 
     public int countMax;  //max countdown number
@@ -30,7 +33,7 @@ public class CountDownScript3 : MonoBehaviour
         wall2.GetComponent<GroundControl>().enabled = false;
         wall3.GetComponent<GroundControl>().enabled = false;
         wall4.GetComponent<GroundControl>().enabled = false;
-
+        character.GetComponent<AudioSource>().enabled = false;
         //character.GetComponent<Animation>().enabled = false;
 
         //Call the CountdownFunction
@@ -46,6 +49,7 @@ public class CountDownScript3 : MonoBehaviour
     IEnumerator CountdownFunction()
     {
         //start the countdown
+        countdownSound.PlayDelayed(.4f);
         for (countDown = countMax; countDown > -1; countDown--)
         {
             if (countDown != 0)
@@ -59,6 +63,9 @@ public class CountDownScript3 : MonoBehaviour
             {
                 TextCountDown.text = "GO!";
                 yield return new WaitForSeconds(1);
+                //stop the sound
+                countdownSound.Stop();
+                isCountDown = true;  //set the flag to true
             }
         }
         //enable all the scripts and animation once the count is down
@@ -72,6 +79,8 @@ public class CountDownScript3 : MonoBehaviour
         wall2.GetComponent<GroundControl>().enabled = true;
         wall3.GetComponent<GroundControl>().enabled = true;
         wall4.GetComponent<GroundControl>().enabled = true;
+        character.GetComponent<AudioSource>().enabled = true;
+
 
         //character.GetComponent<Animation>().enabled = true;
         //disable the GUIText once the countdown is done with

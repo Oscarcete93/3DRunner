@@ -6,6 +6,7 @@ public class SpawnScriptCube : MonoBehaviour
     public GameObject Wall;
     public GameObject powerup;
     public GameObject MovingWall;
+    public GameObject Wall2;
 
     float timeElapsed = 0;
     float powerElapsed = 0;
@@ -22,10 +23,10 @@ public class SpawnScriptCube : MonoBehaviour
     float randtime3 = 1;
     float randtime4 = 1;
 
-    Vector3 Bot = new Vector3(3.57f, 3.5f, 80);
-    Vector3 Right = new Vector3(5, 4.93f, 80);
-    Vector3 Left = new Vector3(2, 4.93f, 80);
-    Vector3 Top = new Vector3(3.57f, 6.2f, 80);
+    Vector3 Bot = new Vector3(3.57f, 3, 80);
+    Vector3 Right = new Vector3(5.54f, 4.93f, 80);
+    Vector3 Left = new Vector3(1.62f, 4.93f, 80);
+    Vector3 Top = new Vector3(3.57f, 6.5f, 80);
 
     void Update()
     {
@@ -40,7 +41,7 @@ public class SpawnScriptCube : MonoBehaviour
         if (timeElapsed > powerCycle)
         {
             spawnPowerup = !spawnPowerup;
-            powerpos = Random.Range(0,3);
+            powerpos = Random.Range(0,4);
             timeElapsed = 0;
         }
         if (spawnPowerup && powerElapsed > spawnCycle)
@@ -63,36 +64,52 @@ public class SpawnScriptCube : MonoBehaviour
         if (cityRightElapsed > randtime1)
         {
 
-            temp = (GameObject)Instantiate(Wall);
-            int position = (powerpos +Random.Range(0, 2))%4;
+            temp = (GameObject)Instantiate(Wall2);
+            int position = (powerpos +Random.Range(0, 6))%4;
             if (powerpos == 0) temp.transform.position = Bot;
-            else if (powerpos == 1) temp.transform.position = Right;
-            else if (powerpos == 2) temp.transform.position = Left;
+            else if (powerpos == 1)
+            {
+                temp.transform.position = Right;
+                temp.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
+            else if (powerpos == 2)
+            {
+                temp.transform.position = Left;
+                temp.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
             else temp.transform.position = Top;
             cityRightElapsed = 0;
-            randtime1 = Random.Range(1, 12) / 7;
+            randtime1 = Random.Range(1, 20) / 5;
         }
         if (cityLeftElapsed > randtime2)
         {
 
-            temp = (GameObject)Instantiate(Wall);
-            int position = (powerpos + Random.Range(0, 2)) % 4;
+            temp = (GameObject)Instantiate(Wall2);
+            int position = (powerpos + Random.Range(0, 6)) % 4;
             if (powerpos == 0) temp.transform.position = Bot;
-            else if (powerpos == 1) temp.transform.position = Right;
-            else if (powerpos == 2) temp.transform.position = Left;
+            else if (powerpos == 1)
+            {
+                temp.transform.position = Right;
+                temp.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
+            else if (powerpos == 2)
+            {
+                temp.transform.position = Left;
+                temp.transform.rotation = Quaternion.Euler(0, 0, 90);
+            }
             else temp.transform.position = Top;
             cityLeftElapsed = 0;
-            randtime2 = Random.Range(1, 12) / 7;
+            randtime2 = Random.Range(1, 20) / 7;
         }
         if (towerRightElapsed > randtime3)
         {
 
            temp = (GameObject)Instantiate(MovingWall);
-           
-           temp.transform.position = new Vector3(3.36f, 1.88f, 80);
+
+            temp.transform.position = new Vector3(3.36f, 3, Random.Range(40, 50));
            
            towerRightElapsed = 0;
-           randtime3 = Random.Range(1, 12) / 7;
+           randtime3 = Random.Range(1, 12) / 2;
            }
         //if (towerLeftElapsed > randtime4)
         //{
