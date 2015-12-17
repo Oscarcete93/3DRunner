@@ -8,6 +8,8 @@ public class SpawnScriptCube : MonoBehaviour
     public GameObject MovingWall;
     public GameObject Wall2;
 
+    float multiplier = 0;
+    float totalTimeElapsed=0;
     float timeElapsed = 0;
     float powerElapsed = 0;
     float cityRightElapsed = 0;
@@ -31,6 +33,8 @@ public class SpawnScriptCube : MonoBehaviour
     void Update()
     {
         GameObject temp;
+        multiplier = 1 + totalTimeElapsed / 30;
+        totalTimeElapsed += Time.deltaTime;
         timeElapsed += Time.deltaTime;
         powerElapsed += Time.deltaTime;
         cityRightElapsed += Time.deltaTime;
@@ -66,50 +70,50 @@ public class SpawnScriptCube : MonoBehaviour
 
             temp = (GameObject)Instantiate(Wall2);
             int position = (powerpos +Random.Range(0, 6))%4;
-            if (powerpos == 0) temp.transform.position = Bot;
-            else if (powerpos == 1)
+            if (position == 0) temp.transform.position = Bot;
+            else if (position == 1)
             {
                 temp.transform.position = Right;
                 temp.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
-            else if (powerpos == 2)
+            else if (position == 2)
             {
                 temp.transform.position = Left;
                 temp.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
             else temp.transform.position = Top;
             cityRightElapsed = 0;
-            randtime1 = Random.Range(1, 20) / 5;
+            randtime1 = Random.Range(1, 20) / (3*multiplier);
         }
         if (cityLeftElapsed > randtime2)
         {
 
             temp = (GameObject)Instantiate(Wall2);
             int position = (powerpos + Random.Range(0, 6)) % 4;
-            if (powerpos == 0) temp.transform.position = Bot;
-            else if (powerpos == 1)
+            if (position == 0) temp.transform.position = Bot;
+            else if (position == 1)
             {
                 temp.transform.position = Right;
                 temp.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
-            else if (powerpos == 2)
+            else if (position == 2)
             {
                 temp.transform.position = Left;
                 temp.transform.rotation = Quaternion.Euler(0, 0, 90);
             }
             else temp.transform.position = Top;
             cityLeftElapsed = 0;
-            randtime2 = Random.Range(1, 20) / 7;
+            randtime2 = Random.Range(1, 20) / (3 * multiplier);
         }
         if (towerRightElapsed > randtime3)
         {
 
            temp = (GameObject)Instantiate(MovingWall);
 
-            temp.transform.position = new Vector3(3.36f, 3, Random.Range(40, 50));
+            temp.transform.position = new Vector3(3.36f, 3, Random.Range(40, 55));
            
            towerRightElapsed = 0;
-           randtime3 = Random.Range(1, 12) / 2;
+           randtime3 = Random.Range(1, 12) /(2 * multiplier);
            }
         //if (towerLeftElapsed > randtime4)
         //{

@@ -4,12 +4,14 @@ using System.Collections;
 public class GameControlScript : MonoBehaviour
 {
     public GUISkin skin;
-    float timeRemaining = 10;
+    float timeRemaining = 120;
     float timeExtension = 3f;
     float timeDeduction = 2f;
+    int lifes = 5;
     float totalTimeElapsed = 0;
     float score = 0f;
     public bool isGameOver = false;
+    public bool completed = false;
 
     void Start()
     {
@@ -18,13 +20,13 @@ public class GameControlScript : MonoBehaviour
 
     void Update()
     {
-        if (isGameOver)
-            return;
+        if (isGameOver)return;
 
         totalTimeElapsed += Time.deltaTime;
         score = totalTimeElapsed * 100;
         timeRemaining -= Time.deltaTime;
-        if (timeRemaining <= 0)
+        if (totalTimeElapsed > 120) completed = true;
+        if (lifes <=0)
         {
             isGameOver = true;
         }
@@ -32,12 +34,12 @@ public class GameControlScript : MonoBehaviour
 
     public void PowerupCollected()
     {
-        timeRemaining += timeExtension;
+        score += 1000;
     }
 
     public void WallCollision()
     {
-        timeRemaining -= timeDeduction;
+        --lifes; 
     }
     public void GameOver()
     {
@@ -48,14 +50,40 @@ public class GameControlScript : MonoBehaviour
     {
         GUI.skin = skin; //use the skin in game over menu
         //check if game is not over, if so, display the score and the time left
-        if (!isGameOver)
+        
+       if (completed)
+        {
+            Time.timeScale = 0; //set the timescale to zero so as to stop the game world
+                                //display the final score
+            GUI.Box(new Rect(Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "LEVEL COMPLETED!\nYOUR SCORE: " + (int)score);
+
+            //restart the game on click
+            if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "RESTART"))
+            {
+                Application.LoadLevel(Application.loadedLevel);
+            }
+
+            //load the main menu, which as of now has not been created
+            if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + 2 * Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "MAIN MENU"))
+            {
+                Application.LoadLevel(1);
+            }
+
+            //exit the game
+            if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + 3 * Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "EXIT GAME"))
+            {
+                Application.Quit();
+            }
+
+        }
+        else if (!isGameOver)
         {
             GUI.Label(new Rect(10, 10, Screen.width / 5, Screen.height / 6), "TIME LEFT: " + ((int)timeRemaining).ToString());
             GUI.Label(new Rect(Screen.width - (Screen.width / 6), 10, Screen.width / 6, Screen.height / 6), "SCORE: " + ((int)score).ToString());
+            GUI.Label(new Rect(0, 500, Screen.width / 5, Screen.height), "LIFES: " + lifes.ToString());
+
         }
-        //if game over, display game over menu with score
-        else
-        {
+        else {
             Time.timeScale = 0; //set the timescale to zero so as to stop the game world
                                 //display the final score
             GUI.Box(new Rect(Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "GAME OVER\nYOUR SCORE: " + (int)score);
