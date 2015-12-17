@@ -39,6 +39,10 @@ public class GameControlScript : MonoBehaviour
     {
         timeRemaining -= timeDeduction;
     }
+    public void GameOver()
+    {
+        isGameOver= true;
+    }
 
     void OnGUI()
     {
