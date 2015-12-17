@@ -10,7 +10,7 @@ public class Boundary
 
 
 public class PlayerController : MonoBehaviour {
-
+	//public float jumpForce;
     private AudioSource audioSource;
     private Rigidbody rb;
     public float speed;
@@ -21,6 +21,7 @@ public class PlayerController : MonoBehaviour {
     public Transform shotSpawn;
     public float fireRate;
 
+	//private float high;
     private float nextFire;
 
     void Update()
@@ -45,7 +46,10 @@ public class PlayerController : MonoBehaviour {
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
         float moveVertical = Input.GetAxis("Vertical");
-
+		/*float jump = 1.0f;
+		if (Input.GetButton ("Jump")) {
+			jump = jumpForce;
+		}*/
 		Vector3 movement = new Vector3(moveHorizontal, 1.0f, moveVertical);
         rb.velocity = movement * speed;
         
@@ -57,7 +61,7 @@ public class PlayerController : MonoBehaviour {
         );
 
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
-        
+
     }
 
 }
