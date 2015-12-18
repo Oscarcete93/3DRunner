@@ -149,6 +149,13 @@ public class GameController : MonoBehaviour {
         gameOver = true;
     }
 
+	public void getAttacked(int damage) {
+		lifes -= damage;
+	}
+
+	public bool isAlive() {
+		return lifes > 0;
+	}
 
 
 	void OnGUI()
