@@ -34,12 +34,12 @@ public class GameControlScript : MonoBehaviour
             isGameOver = true;
         }
         totalTimeElapsed += Time.deltaTime;
-        score += totalTimeElapsed * 1;
+        //score += totalTimeElapsed * 1;
     }
 
     public void PowerupCollected()
     {
-        score += 1000;
+        score += 100;
     }
 
     public void WallCollision()

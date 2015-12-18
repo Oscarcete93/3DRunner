@@ -29,6 +29,10 @@ public class PauseMenuScript : MonoBehaviour
             Time.timeScale = 1;  //set it back to 1 on unpausing the game
 
     }
+    public bool isPaused()
+    {
+        return paused;
+    }
 
     private void OnGUI()
     {
