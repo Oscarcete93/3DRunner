@@ -17,7 +17,7 @@ public class GameController : MonoBehaviour {
 
     private bool gameOver;
     //private bool restart;
-    private float score;
+    private int score;
 
 	public AudioSource countdownSound; //reference to the audio source
 	private bool isCountDown = false; //countdown flag
@@ -34,7 +34,8 @@ public class GameController : MonoBehaviour {
 	private float totalTimeElapsed;
 	private bool completed;
 
-
+	public GameObject destination;
+	private float maxZ;
 
     void Start()
     {
@@ -51,6 +52,8 @@ public class GameController : MonoBehaviour {
 		completed = false;
         score = 0;
         //UpdateScore();
+		Rigidbody rb = destination.GetComponent<Rigidbody>();
+		rb.velocity = new Vector3 (0.0f, 0.0f, (-60/timeRemaining));
 		StartCoroutine(CountdownFunction());
         StartCoroutine(SpawnWaves());
     }
@@ -60,7 +63,6 @@ public class GameController : MonoBehaviour {
 		if (gameOver)return;
 
 		totalTimeElapsed += Time.deltaTime;
-		score = totalTimeElapsed * 100;
 		if (timeRemaining > 0) timeRemaining -= Time.deltaTime;
 		else completed = true;
 		if (lifes <1)
@@ -68,6 +70,11 @@ public class GameController : MonoBehaviour {
 			gameOver = true;
 		}
     }
+
+	void FixedUpdate() {
+		//destination.transform.position = new Vector3 (0.0f, 0.0f, -40f);
+	
+	}
 
     IEnumerator SpawnWaves()
     {
@@ -84,8 +91,10 @@ public class GameController : MonoBehaviour {
             }
             yield return new WaitForSeconds(waveWait);
 
-            if (gameOver)
+            if (gameOver || completed)
             {
+				Rigidbody rb = destination.GetComponent<Rigidbody>();
+				rb.velocity = new Vector3 (0.0f, 0.0f, 0.0f);
                 //restartText.text = "Press 'R' for Restart";
                 //restart = true;
                 break;
@@ -151,10 +160,11 @@ public class GameController : MonoBehaviour {
 		{
 			Time.timeScale = 0; //set the timescale to zero so as to stop the game world
 			//display the final score
-			GUI.Box(new Rect(Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "LEVEL COMPLETED!\nYOUR SCORE: " + (int)score);
+			GUI.Box(new Rect(Screen.width / 4, Screen.height / 4, Screen.width / 2, Screen.height / 2), "LEVEL COMPLETED!\nYOUR SCORE: " + (int)score+"\n"+
+			"Your ship has entered into fifth dimension\n" + "now try to escape!");
 
 			//restart the game on click
-			if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "CONTINUE"))
+			if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "NEXT"))
 			{
 				Application.LoadLevel("Level 2");
 			}
