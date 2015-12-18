@@ -9,7 +9,7 @@ public class GameControlScript : MonoBehaviour
     private float timeDeduction = 2f;
     public int lifes;
     private float totalTimeElapsed = 0.0f;
-    private float score = 0f;
+    public float score = 0f;
     public bool isGameOver = false;
     public bool completed = false;
 
@@ -23,7 +23,7 @@ public class GameControlScript : MonoBehaviour
         if (isGameOver)return;
 
         totalTimeElapsed += Time.deltaTime;
-        score = totalTimeElapsed * 100;
+        score += totalTimeElapsed * 1;
 		if (timeRemaining > 0) timeRemaining -= Time.deltaTime;
 		else completed = true;
         if (lifes <=0)

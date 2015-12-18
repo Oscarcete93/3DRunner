@@ -101,6 +101,7 @@ public class GameController : MonoBehaviour {
 		{
 			if (countDown != 0)
 			{
+                
 				//display the number to the screen via the GUIText
 				TextCountDown.text = countDown.ToString();
 				//add a one second delay
@@ -112,7 +113,7 @@ public class GameController : MonoBehaviour {
 				yield return new WaitForSeconds(1);
 				//stop the sound
 				countdownSound.Stop();
-				isCountDown = true;  //set the flag to true
+                isCountDown = true;  //set the flag to true
 			}
 		}
 		//character.GetComponent<Animation>().enabled = true;

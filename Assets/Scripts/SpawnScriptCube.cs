@@ -110,7 +110,7 @@ public class SpawnScriptCube : MonoBehaviour
 
            temp = (GameObject)Instantiate(MovingWall);
 
-            temp.transform.position = new Vector3(3.36f, 3, Random.Range(40, 55));
+            temp.transform.position = new Vector3(3.36f, 3, Random.Range(40, 65));
            
            towerRightElapsed = 0;
            randtime3 = Random.Range(1, 12) /(2 * multiplier);
