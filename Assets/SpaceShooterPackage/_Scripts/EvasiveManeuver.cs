@@ -38,12 +38,13 @@ public class EvasiveManeuver : MonoBehaviour {
     void FixedUpdate()
     {
         float newManeuver = Mathf.MoveTowards(rb.velocity.x, targetManeuver, Time.deltaTime * smoothing);
-        rb.velocity = new Vector3(newManeuver, 0.0f, currentSpeed);
+		float newManeuvery = Mathf.MoveTowards(rb.velocity.y, targetManeuver, Time.deltaTime * smoothing);
+		rb.velocity = new Vector3(newManeuver, newManeuvery, currentSpeed);
         rb.position = new Vector3
         (
             Mathf.Clamp(rb.position.x, boundary.xMin, boundary.xMax),
-            0.0f,
-            Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax)
+			Mathf.Clamp(rb.position.y, boundary.zMin, boundary.zMax),
+            rb.position.z
         );
 
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
