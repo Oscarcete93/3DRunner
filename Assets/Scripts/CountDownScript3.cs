@@ -49,7 +49,8 @@ public class CountDownScript3 : MonoBehaviour
     IEnumerator CountdownFunction()
     {
         //start the countdown
-        countdownSound.PlayDelayed(.4f);
+        countdownSound.Play();
+        //countdownSound.PlayDelayed(.4f);
         for (countDown = countMax; countDown > -1; countDown--)
         {
             if (countDown != 0)

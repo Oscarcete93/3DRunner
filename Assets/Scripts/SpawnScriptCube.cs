@@ -6,6 +6,7 @@ public class SpawnScriptCube : MonoBehaviour
     public GameObject Wall;
     public GameObject powerup;
     public GameObject MovingWall;
+    public GameObject MovingWall2;
     public GameObject Wall2;
 
     float multiplier = 0;
@@ -33,7 +34,7 @@ public class SpawnScriptCube : MonoBehaviour
     void Update()
     {
         GameObject temp;
-        multiplier = 1 + totalTimeElapsed / 30;
+        multiplier = 1 + totalTimeElapsed / 35;
         totalTimeElapsed += Time.deltaTime;
         timeElapsed += Time.deltaTime;
         powerElapsed += Time.deltaTime;
@@ -115,16 +116,17 @@ public class SpawnScriptCube : MonoBehaviour
            towerRightElapsed = 0;
            randtime3 = Random.Range(1, 12) /(2 * multiplier);
            }
-        //if (towerLeftElapsed > randtime4)
-        //{
+        if (towerLeftElapsed > randtime4)
+        {
 
-        //    temp = (GameObject)Instantiate(tower);
-        //    int distance = Random.Range(4, 15);
-        //    temp.transform.position = new Vector3(powerpos - distance, 0, 80);
-        //    temp.transform.localScale = new Vector3(Random.Range(2, 6), Random.Range(2, 6), Random.Range(2, 6));
-        //    towerLeftElapsed = 0;
-        //    randtime4 = Random.Range(1, 12) / 7;
-        //}
+            temp = (GameObject)Instantiate(MovingWall2);
+
+            temp.transform.position = new Vector3(1.4f, 4.93f, Random.Range(40, 65));
+            temp.transform.rotation = Quaternion.Euler(0, 0, 90);
+
+            towerLeftElapsed = 0;
+           randtime4 = Random.Range(1, 12) / 1;
+        }
 
 
     }

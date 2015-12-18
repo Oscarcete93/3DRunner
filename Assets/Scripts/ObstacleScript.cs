@@ -7,6 +7,6 @@ public class ObstacleScript : MonoBehaviour
 
     void Update()
     {
-        transform.Translate(0, 0, objectSpeed * Time.timeScale);
+        transform.Translate(0, 0, objectSpeed * Time.timeScale, Space.World);
     }
 }

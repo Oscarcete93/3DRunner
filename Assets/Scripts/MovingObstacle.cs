@@ -9,7 +9,7 @@ public class MovingObstacle : MonoBehaviour
     void Update()
     {
         time += Time.deltaTime;
-        transform.Translate(0,SlowSpeed * Time.timeScale*d, 0);
+        transform.Translate(0,SlowSpeed * Time.timeScale*d, 0, Space.World);
         if (time >1.4)
         {
             time = 0;

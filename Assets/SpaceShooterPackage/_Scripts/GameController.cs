@@ -199,7 +199,7 @@ public class GameController : MonoBehaviour {
 		{
 			GUI.Label(new Rect(10, 10, Screen.width / 5, Screen.height / 6), "TIME LEFT: " + ((int)timeRemaining).ToString());
 			GUI.Label(new Rect(Screen.width - (Screen.width / 6), 10, Screen.width / 6, Screen.height / 6), "SCORE: " + ((int)score).ToString());
-			GUI.Label(new Rect(0, 500, Screen.width / 5, Screen.height), "LIFES: " + lifes.ToString());
+			GUI.Label(new Rect(10, Screen.height - Screen.height / 8, Screen.width / 5, Screen.height), "LIFES: " + lifes.ToString());
 
 		}
 		else {

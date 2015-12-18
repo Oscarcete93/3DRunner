@@ -4,7 +4,7 @@ using System.Collections;
 public class GameControlScript : MonoBehaviour
 {
     public GUISkin skin;
-	public  float timeRemaining;
+	public  float timeRemaining = 80;
     private float timeExtension = 3f;
     private float timeDeduction = 2f;
     public int lifes;
@@ -22,14 +22,19 @@ public class GameControlScript : MonoBehaviour
     {
         if (isGameOver)return;
 
-        totalTimeElapsed += Time.deltaTime;
-        score += totalTimeElapsed * 1;
-		if (timeRemaining > 0) timeRemaining -= Time.deltaTime;
-		else completed = true;
+        
+        if (timeRemaining > 0) timeRemaining -= Time.deltaTime;
+        else
+        {
+            completed = true;
+            return;
+        }
         if (lifes <=0)
         {
             isGameOver = true;
         }
+        totalTimeElapsed += Time.deltaTime;
+        score += totalTimeElapsed * 1;
     }
 
     public void PowerupCollected()
@@ -80,7 +85,7 @@ public class GameControlScript : MonoBehaviour
         {
             GUI.Label(new Rect(10, 10, Screen.width / 5, Screen.height / 6), "TIME LEFT: " + ((int)timeRemaining).ToString());
             GUI.Label(new Rect(Screen.width - (Screen.width / 6), 10, Screen.width / 6, Screen.height / 6), "SCORE: " + ((int)score).ToString());
-            GUI.Label(new Rect(0, 500, Screen.width / 5, Screen.height), "LIFES: " + lifes.ToString());
+            GUI.Label(new Rect(10, Screen.height-Screen.height/8, Screen.width / 5, Screen.height), "LIFES: " + lifes.ToString());
 
         }
         else {

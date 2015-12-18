@@ -19,6 +19,7 @@ public class PlayerControlwSound : MonoBehaviour
     public float jumpSpeed = 8.0f;
     public float gravity = 20.0f;
     private Vector3 moveDirection = Vector3.zero;
+    public bool soundplayed = false;
 
     //start 
     void Start()
@@ -30,15 +31,17 @@ public class PlayerControlwSound : MonoBehaviour
     void Update()
     {
         timer -= Time.deltaTime;
-        if (control.isGameOver)
+        if (control.isGameOver && soundplayed ==false)
         {
             gameObject.GetComponent<AudioSource>().enabled = false;
             GameOver.Play();
+            soundplayed = true;
         }
-        if (control.completed)
+        if (control.completed && soundplayed == false)
         {
             gameObject.GetComponent<AudioSource>().enabled = false;
             LevelComplete.Play();
+            soundplayed = true;
         }
 
     }
@@ -57,21 +60,28 @@ public class PlayerControlwSound : MonoBehaviour
 
             control.WallCollision();
             WallCollideSound.Play();  //play powerup collected sound
-            timer = 0.1f;
+            timer = 0.5f;
         }
         else if (other.gameObject.name == "wall2(Clone)" && timer < 0)
         {
 
             control.WallCollision();
             WallCollideSound.Play();  //play powerup collected sound
-            timer = 0.1f;
+            timer = 0.5f;
         }
         else if (other.gameObject.name == "MovingWall(Clone)" && timer < 0)
         {
 
             control.WallCollision();
             WallCollideSound.Play();  //play powerup collected sound
-            timer = 0.1f;
+            timer = 0.5f;
+        }
+        else if (other.gameObject.name == "MovingWall 1(Clone)" && timer < 0)
+        {
+
+            control.WallCollision();
+            WallCollideSound.Play();  //play powerup collected sound
+            timer = 0.5f;
         }
         Destroy(other.gameObject);            //destroy the snag or powerup if colllected by the player
 
