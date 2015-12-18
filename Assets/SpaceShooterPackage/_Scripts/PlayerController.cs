@@ -15,8 +15,9 @@ public class PlayerController : MonoBehaviour {
     private Rigidbody rb;
     public float speed;
     public float tilt;
-    public Boundary boundary;
-
+    //public Boundary boundary;
+	public float xMin;
+	public float xMax;
     public GameObject shot;
     public Transform shotSpawn;
     public float fireRate;
@@ -45,20 +46,15 @@ public class PlayerController : MonoBehaviour {
     void FixedUpdate()
     {
         float moveHorizontal = Input.GetAxis("Horizontal");
-        float moveVertical = Input.GetAxis("Vertical");
+        //float moveVertical = Input.GetAxis("Vertical");
 		/*float jump = 1.0f;
 		if (Input.GetButton ("Jump")) {
 			jump = jumpForce;
 		}*/
-		Vector3 movement = new Vector3(moveHorizontal, 1.0f, moveVertical);
+		Vector3 movement = new Vector3(moveHorizontal, 0.0f, 0.0f);
         rb.velocity = movement * speed;
         
-        rb.position = new Vector3
-        (
-            Mathf.Clamp(rb.position.x, boundary.xMin, boundary.xMax),
-			1.0f,
-            Mathf.Clamp(rb.position.z, boundary.zMin, boundary.zMax)
-        );
+        rb.position = new Vector3 (Mathf.Clamp(rb.position.x, xMin, xMax),0.0f,0.0f);
 
         rb.rotation = Quaternion.Euler(0.0f, 0.0f, rb.velocity.x * -tilt);
 

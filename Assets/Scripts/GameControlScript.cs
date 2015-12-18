@@ -4,12 +4,12 @@ using System.Collections;
 public class GameControlScript : MonoBehaviour
 {
     public GUISkin skin;
-    float timeRemaining = 120;
-    float timeExtension = 3f;
-    float timeDeduction = 2f;
-    int lifes = 5;
-    float totalTimeElapsed = 0;
-    float score = 0f;
+	public  float timeRemaining;
+    private float timeExtension = 3f;
+    private float timeDeduction = 2f;
+    public int lifes;
+    private float totalTimeElapsed = 0.0f;
+    private float score = 0f;
     public bool isGameOver = false;
     public bool completed = false;
 
@@ -24,8 +24,8 @@ public class GameControlScript : MonoBehaviour
 
         totalTimeElapsed += Time.deltaTime;
         score = totalTimeElapsed * 100;
-        timeRemaining -= Time.deltaTime;
-        if (totalTimeElapsed > 120) completed = true;
+		if (timeRemaining > 0) timeRemaining -= Time.deltaTime;
+		else completed = true;
         if (lifes <=0)
         {
             isGameOver = true;
@@ -66,7 +66,7 @@ public class GameControlScript : MonoBehaviour
             //load the main menu, which as of now has not been created
             if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + 2 * Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "MAIN MENU"))
             {
-                Application.LoadLevel(1);
+				Application.LoadLevel("MainMenu");
             }
 
             //exit the game
@@ -97,7 +97,7 @@ public class GameControlScript : MonoBehaviour
             //load the main menu, which as of now has not been created
             if (GUI.Button(new Rect(Screen.width / 4 + 10, Screen.height / 4 + 2 * Screen.height / 10 + 10, Screen.width / 2 - 20, Screen.height / 10), "MAIN MENU"))
             {
-                Application.LoadLevel(1);
+				Application.LoadLevel("MainMenu");
             }
 
             //exit the game
